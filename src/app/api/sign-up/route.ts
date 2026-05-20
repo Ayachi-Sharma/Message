@@ -11,6 +11,26 @@ export async function POST(request:Request) {
 
     try {
         const {username, email, password} = await request.json();
+
+        const existingUserVerifiedByUsername = await UserModel.findOne({
+            username,
+            isVerified: true,
+        }) 
+
+        if (existingUserVerifiedByUsername) {
+            return Response.json({
+                success: false,
+                message: "Username already taken!"
+            },{
+                status:409
+            })
+        }
+
+        const existingUserByEmail = await UserModel.findOne({email});
+
+        if (condition) {
+            
+        }
     } catch (error) {
         console.log("Error in regestration of user");
         return Response.json(

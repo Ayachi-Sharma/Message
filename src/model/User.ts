@@ -71,5 +71,7 @@ const UserSchema : Schema<User> = new Schema ({
     messages:[MessageSchema]
 })
 
-
 // Write export code such that if moongose has user model then use it and if not create it and export it 
+const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model("User", UserSchema)
+
+export default UserModel;
