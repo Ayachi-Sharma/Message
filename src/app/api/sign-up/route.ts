@@ -70,13 +70,13 @@ export async function POST(request: Request) {
             verifyCode
         )
 
-        if (!emailResponse) {
+        if (!emailResponse.success) {
             return Response.json({
                 success:false,
                 message: email.message
             },{
                 status:500
-            })
+            });
         }
 
         return Response.json({
@@ -84,7 +84,8 @@ export async function POST(request: Request) {
             message: "User Registered sucessfull. Please verify your email"
         }, {
             status:201
-        })
+        });
+
     } catch (error) {
         console.log("Error in regestration of user");
         return Response.json(
@@ -93,11 +94,6 @@ export async function POST(request: Request) {
                 status: 500,
                 message: "Error in regestring user"
             }
-            // Trial 
-            // ,
-            // {
-            //     status: 500
-            // }
         )
 
     }

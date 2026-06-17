@@ -13,6 +13,7 @@ async function dbConnect ():Promise<void> {
         return
     }
     try {
+        // console.log(process.env.DB_URI)
         const db = await mongoose.connect(process.env.DB_URI || '')
         // console.log(db);
         
@@ -22,7 +23,7 @@ async function dbConnect ():Promise<void> {
     } catch (error) {
         console.log("db connection failed", error);
         
-        process.exit(1);
+        throw error;
     }
 }
 
